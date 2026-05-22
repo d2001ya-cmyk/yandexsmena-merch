@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мерчендайзинг у партнёра «Кофе Лебо»</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff9f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      box-shadow: 0 4px 20px rgba(230, 160, 80, 0.15);
+      border: 1px solid #ffe8d6;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #d97706;
+      text-align: center;
+    }
+    .intro {
+      font-size: 16px;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #666;
+    }
+    .section {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f5e9dc;
+    }
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: #f59e0b;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 340px;
+      padding: 14px 20px;
+      margin: 8px 0;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(249, 115, 22, 0.35);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 18px rgba(249, 115, 22, 0.5);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+    .btn-secondary {
+      background: linear-gradient(135deg, #fb923c, #f97316);
+      box-shadow: 0 3px 10px rgba(251, 146, 60, 0.35);
+    }
+    .btn-secondary:hover {
+      box-shadow: 0 5px 18px rgba(251, 146, 60, 0.5);
+    }
+    .btn-outline {
+      background: #fff7ed;
+      border: 2px solid #f97316;
+      color: #c2410c;
+    }
+    .btn-outline:hover {
+      background: #f97316;
+      color: #fff;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .btn-group.inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-group.inline .btn {
+      max-width: none;
+      width: auto;
+      margin: 0;
+    }
+    .note {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #7c2d12;
+    }
+    .note.success {
+      background: #f0fdf4;
+      border-left-color: #22c55e;
+      color: #166534;
+    }
+    .telegram-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fdba74;
+      color: #7c2d12;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 8px 0;
+      border: 1px solid #fb923c;
+    }
+    .permit-box {
+      background: linear-gradient(135deg, #fff7ed, #ffedd5);
+      border: 1px solid #fdba74;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .permit-box h4 {
+      color: #92400e;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .permit-box p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #f5e9dc;
+      color: #78716c;
+      font-size: 14px;
+    }
+    .highlight {
+      background: #fef3c7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      color: #92400e;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 16px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      .btn-group.inline .btn {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>☕ Мерчендайзинг у партнёра «Кофе Лебо»</h1>
+    <p class="intro">Очень рады, что наша новая услуга заинтересовала Вас!<br>Ниже — ключевые моменты, которые важно знать при выполнении задания.</p>
+
+    <div class="section">
+      <h2>📋 Основные правила</h2>
+      <ul class="steps">
+        <li>Выполнять задание можно в любой период с момента открытия магазина до <span class="highlight">17:00</span>.</li>
+        <li>Подтверждать задание кодом не нужно — просто игнорируйте запрос приложения. Смена запустится автоматически, выплата придёт после заполнения анкеты.</li>
+        <li>Рекомендуем выполнять задания по мерчендайзингу <strong>вдобавок к основным</strong> на этой точке — так вы сэкономите время на дорогу и уже будете иметь нужные допуски.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📚 Обучение</h2>
+      <p>Мы подготовили подробное руководство по услуге мерчендайзинга у партнёра «Кофе Лебо»:</p>
+      <div class="btn-group">
+        <a href="https://clck.ru/3StKb9" target="_blank" class="btn btn-secondary">📘 Открыть обучение</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📝 Заполнение анкеты</h2>
+      <p>Анкета заполняется в приложении <strong>Optimum f.r.s.</strong></p>
+      
+      <div class="note">
+        🔹 Перед открытием анкеты обязательно установите приложение и зарегистрируйтесь в нём.
+      </div>
+
+      <div class="btn-group inline">
+        <a href="https://clck.ru/3SCRJJ" target="_blank" class="btn btn-outline">🍎 Скачать для iOS</a>
+        <a href="https://clck.ru/3SCRUR" target="_blank" class="btn btn-outline">🤖 Скачать для Android</a>
+      </div>
+
+      <p style="margin-top:16px;"><strong>Для Санкт-Петербурга и Ленинградской области:</strong></p>
+      <div class="btn-group">
+        <a href="https://d2001ya-cmyk.github.io/lebo_spbb/" target="_blank" class="btn">📍 Открыть анкету для СПБ и ЛО</a>
+      </div>
+
+      <p style="margin-top:16px;"><strong>Для МО и регионов:</strong></p>
+      <div class="btn-group">
+        <a href="https://d2001ya-cmyk.github.io/lebo_regions/" target="_blank" class="btn">📍 Открыть анкету для МО и регионов</a>
+      </div>
+
+      <p style="font-size:14px; color:#666; margin-top:8px;">Выбирайте магазин, в котором у вас назначено задание.</p>
+    </div>
+
+    <div class="section">
+      <h2>💬 Поддержка</h2>
+      <p>Для оперативных ответов на вопросы мы создали отдельный чат в Telegram:</p>
+      
+      <div class="telegram-badge">✈️ Telegram</div>
+      
+      <div class="btn-group">
+        <a href="https://t.me/+NcJqDXlBKBI2ZWFi" target="_blank" class="btn btn-secondary">💬 Чат поддержки (Санкт-Петербург)</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🔐 Допуски и сопроводительные документы</h2>
+      
+      <div class="permit-box">
+        <h4>📄 Сопроводительное письмо</h4>
+        <p>Для получения сопроводительного письма заполните все данные по вашему заданию в форме и нажмите <strong>«Скачать PDF»</strong>:</p>
+        <a href="https://d2001ya-cmyk.github.io/c.doc/" target="_blank" class="btn">📥 Скачать сопроводительное письмо (PDF)</a>
+      </div>
+
+      <div class="note success">
+        ✅ Допуск может быть отправлен вам автоматически до начала задания.
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>🎯 Удачи на задании!<br>Спасибо, что помогаете делать задания в «Смене» более разнообразными!</p>
+    </div>
+  </div>
+</body>
+</html>
