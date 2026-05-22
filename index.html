@@ -1,1 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обучение мерчендайзеров | Яндекс Смена</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #F97316;
+      --orange-dark: #EA580C;
+      --orange-deep: #C2410C;
+      --orange-faint: #FFF7ED;
+      --orange-light: #FFEDD5;
+      --bg: #FFFBF7;
+      --dark: #1C0A00;
+      --text: #292524;
+      --muted: #78716C;
+      --border: rgba(0,0,0,0.08);
+      --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Onest', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
+    /* HEADER */
+    .site-header {
+      background: var(--dark);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .site-logo-mark {
+      width: 28px; height: 28px;
+      background: var(--orange);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .site-logo-text {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: .02em;
+    }
+    .site-logo-text em { color: rgba(255,255,255,0.4); font-style: normal; }
+    .header-badge {
+      background: rgba(249,115,22,0.15);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* HERO */
+    .hero {
+      background: var(--dark);
+      padding: 72px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(249,115,22,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249,115,22,.18) 0%, transparent 65%);
+      top: -160px; right: -60px;
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249,115,22,.12);
+      border: 1px solid rgba(249,115,22,.25);
+      border-radius: 100px;
+      padding: 7px 16px;
+      margin-bottom: 28px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--orange);
+    }
+    .hero-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      color: white;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--orange); }
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      width: fit-content;
+    }
+    .hero-stat {
+      padding: 18px 28px;
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+    .hero-stat:first-child { border-radius: 12px 0 0 12px; }
+    .hero-stat:last-child { border-radius: 0 12px 12px 0; }
+    .hero-stat + .hero-stat { border-left: none; }
+    .hero-stat-v {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      display: block;
+      line-height: 1;
+    }
+    .hero-stat-l {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* BRANDS SECTION */
+    .brands-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 48px 80px;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    .brands-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brand-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .brand-card:hover {
+      border-color: var(--orange);
+      transform: translateX(4px);
+      box-shadow: 0 8px 28px rgba(249,115,22,0.1);
+    }
+    .brand-card-icon {
+      width: 56px; height: 56px;
+      background: var(--orange-faint);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+      border: 1px solid var(--orange-light);
+      transition: background .2s;
+    }
+    .brand-card:hover .brand-card-icon { background: var(--orange-light); }
+    .brand-card-body { flex: 1; }
+    .brand-card-name {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .brand-card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .brand-card-arrow {
+      font-size: 18px;
+      color: var(--orange);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity .2s, transform .2s;
+      font-weight: 700;
+    }
+    .brand-card:hover .brand-card-arrow { opacity: 1; transform: translateX(0); }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 64px 24px;
+      background: var(--white);
+      border: 1.5px dashed var(--border);
+      border-radius: 20px;
+    }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-text { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+    /* INFO STRIP */
+    .info-strip {
+      background: var(--orange-faint);
+      border-top: 1px solid var(--orange-light);
+      padding: 40px 48px;
+    }
+    .info-strip-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .info-strip-text { flex: 1; min-width: 260px; }
+    .info-strip-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange-deep);
+      margin-bottom: 8px;
+    }
+    .info-strip-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .info-strip-items {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .info-item { text-align: center; }
+    .info-item-v {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--orange);
+      display: block;
+    }
+    .info-item-l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* FOOTER */
+    .site-footer {
+      background: var(--dark);
+      padding: 28px 48px;
+      text-align: center;
+    }
+    .site-footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
+
+    @media (max-width: 640px) {
+      .site-header { padding: 0 20px; }
+      .hero { padding: 48px 20px 56px; }
+      .brands-section { padding: 40px 20px 56px; }
+      .hero-stats { flex-direction: column; gap: 2px; }
+      .hero-stat { border-radius: 0 !important; border-left: 1px solid rgba(255,255,255,0.09) !important; }
+      .hero-stat:first-child { border-radius: 12px 12px 0 0 !important; }
+      .hero-stat:last-child { border-radius: 0 0 12px 12px !important; }
+      .info-strip { padding: 32px 20px; }
+      .site-footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="/" class="site-logo">
+      <div class="site-logo-mark">📋</div>
+      <span class="site-logo-text">Яндекс Смена <em>/ Обучение</em></span>
+    </a>
+    <div class="header-badge">
+      <div class="badge-dot"></div>
+      Мерчендайзинг
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <div class="badge-dot"></div>
+        Учебный центр
+      </div>
+      <h1 class="hero-title">Обучение<br><span>мерчендайзеров</span></h1>
+      <p class="hero-sub">Курсы по выкладке и работе с товарами для каждого бренда. Выберите заказчика и приступайте — задание без обучения не откроется.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-v">2</span>
+          <span class="hero-stat-l">брендов</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-v">30 мин</span>
+          <span class="hero-stat-l">среднее время</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-v">100%</span>
+          <span class="hero-stat-l">проверка знаний</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brands-section">
+    <div class="section-eyebrow">Выберите бренд</div>
+    <h2 class="section-title">Доступные обучения</h2>
+    <div class="brands-list">
+      
+          <a class="brand-card" href="/courses/rosmen/">
+            <div class="brand-card-icon">📦</div>
+            <div class="brand-card-body">
+              <div class="brand-card-name">Росмэн</div>
+              <div class="brand-card-desc">Мерчендайзинг в рознице</div>
+            </div>
+            <div class="brand-card-arrow">→</div>
+          </a>
+
+          <a class="brand-card" href="/courses/rosmen-1/">
+            <div class="brand-card-icon">📦</div>
+            <div class="brand-card-body">
+              <div class="brand-card-name">Росмэн-1</div>
+              <div class="brand-card-desc">Мерчендайзинг в рознице</div>
+            </div>
+            <div class="brand-card-arrow">→</div>
+          </a>
+    </div>
+  </section>
+
+  <div class="info-strip">
+    <div class="info-strip-inner">
+      <div class="info-strip-text">
+        <div class="info-strip-title">Что вы узнаете в каждом курсе</div>
+        <div class="info-strip-desc">Стандарты выкладки • Работа с планограммами • Управление стеллажами • Ротация товара • Оформление ценников • Анализ остатков</div>
+      </div>
+      <div class="info-strip-items">
+        <div class="info-item"><span class="info-item-v">2</span><div class="info-item-l">брендов</div></div>
+        <div class="info-item"><span class="info-item-v">30 мин</span><div class="info-item-l">на курс</div></div>
+        <div class="info-item"><span class="info-item-v">Тест</span><div class="info-item-l">в конце</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2026 Яндекс Смена — платформа мерчендайзинга</p>
+  </footer>
+
+</body>
+</html>
