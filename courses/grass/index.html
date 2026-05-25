@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мерчендайзинг — Grass</title>
+  
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #F97316;
+      --orange-dark: #EA580C;
+      --orange-deep: #C2410C;
+      --orange-faint: #FFF7ED;
+      --orange-light: #FFEDD5;
+      --beige: #FFFBF5;
+      --beige-mid: #F5ECD7;
+      --dark: #1C0A00;
+      --text: #292524;
+      --muted: #78716C;
+      --border: #E8D5B7;
+      --white: #FFFFFF;
+      --green: #16A34A;
+      --green-bg: #F0FDF4;
+      --green-border: #BBF7D0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--beige); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    /* TOPBAR */
+    .topbar { background: var(--dark); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+    .topbar-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .topbar-mark { width: 26px; height: 26px; background: var(--orange); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+    .topbar-name { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 700; color: white; }
+    .topbar-name em { color: rgba(255,255,255,0.38); font-style: normal; }
+    .back-link { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; font-weight: 600; transition: color .15s; display: flex; align-items: center; gap: 5px; }
+    .back-link:hover { color: white; }
+
+    /* HERO */
+    .hero { background: var(--dark); padding: 36px 24px 44px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(249,115,22,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(249,115,22,.05) 1px, transparent 1px); background-size: 40px 40px; }
+    .hero-glow { position: absolute; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(249,115,22,.2) 0%, transparent 65%); top: -100px; right: -60px; pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; display: flex; align-items: flex-start; gap: 18px; }
+    .hero-icon-wrap { width: 64px; height: 64px; background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; }
+    .hero-text { flex: 1; }
+    .hero-breadcrumb { font-size: 11px; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+    .hero-breadcrumb a { color: rgba(255,255,255,.3); text-decoration: none; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,.6); }
+    .hero-title { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: clamp(18px, 4vw, 28px); font-weight: 900; color: white; line-height: 1.15; margin-bottom: 8px; }
+    .hero-sub { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+    /* CONTENT */
+    .content { max-width: 680px; margin: 0 auto; padding: 24px 24px 64px; display: flex; flex-direction: column; gap: 14px; }
+
+    /* STEP CARDS */
+    .step-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; }
+    .step-card--warn { border-color: #FDE68A; background: #FFFBEB; }
+    .step-card-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--beige); }
+    .step-card--warn .step-card-header { background: #FEF3C7; border-bottom-color: #FDE68A; }
+    .step-icon { font-size: 20px; line-height: 1; }
+    .step-title { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; color: var(--text); }
+    .step-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--text); line-height: 1.6; }
+    .step-body p { font-size: 14px; line-height: 1.6; }
+
+    /* RULES LIST */
+    .rules-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .rules-list li { display: flex; gap: 12px; align-items: flex-start; }
+    .rule-num { width: 22px; height: 22px; border-radius: 50%; background: var(--orange); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .rule-text { font-size: 14px; line-height: 1.6; flex: 1; }
+    .highlight { background: var(--orange-faint); border: 1px solid var(--orange-light); border-radius: 5px; padding: 1px 7px; font-weight: 700; color: var(--orange-deep); font-size: 13px; display: inline; }
+
+    /* INFO CARDS */
+    .info-card { border-radius: 10px; padding: 13px 16px; font-size: 13px; line-height: 1.6; }
+    .accent-note { background: var(--orange-faint); border: 1px solid var(--orange-light); color: var(--orange-deep); }
+    .info-card--key { background: var(--orange-faint); border: 1.5px solid var(--orange-light); color: var(--orange-deep); border-radius: 12px; padding: 16px; font-size: 14px; }
+    .info-card--success { background: var(--green-bg); border: 1px solid var(--green-border); color: #166534; }
+
+    /* PERMIT BOX */
+    .permit-box { background: linear-gradient(135deg, var(--orange-faint), var(--orange-light)); border: 1px solid #FDBA74; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .permit-box-title { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; color: var(--orange-deep); }
+    .permit-box p { font-size: 13px; color: var(--muted); }
+
+    /* TIP LIST */
+    .tip-list { list-style: none; display: flex; flex-direction: column; gap: 8px; padding: 0; }
+    .tip-list li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.55; }
+    .tip-list li::before { content: '•'; position: absolute; left: 0; color: var(--orange); }
+
+    /* BUTTONS */
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 20px; background: linear-gradient(135deg, var(--orange), var(--orange-dark)); color: white; text-decoration: none; border-radius: 12px; font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .03em; transition: transform .15s, box-shadow .15s; box-shadow: 0 3px 12px rgba(249,115,22,.3); width: 100%; max-width: 360px; justify-content: center; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(249,115,22,.4); }
+    .cta-btn:active { transform: none; }
+    .cta-btn--secondary { background: linear-gradient(135deg, #FB923C, var(--orange)); }
+    .cta-btn-icon { font-size: 16px; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; background: var(--orange-faint); border: 1.5px solid var(--orange); color: var(--orange-deep); text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 13px; transition: background .15s, color .15s; }
+    .btn-outline:hover { background: var(--orange); color: white; }
+
+    /* MISC */
+    .sub-label { font-size: 13px; font-weight: 700; color: var(--orange-deep); }
+    .sub-hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .tg-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--orange-light); color: var(--orange-deep); padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; border: 1px solid #FDBA74; }
+    .study-banner { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 1.5px solid #F59E0B; border-radius: 12px; padding: 14px 16px; text-align: center; font-size: 13px; font-weight: 600; color: #92400E; }
+
+    /* FOOTER */
+    .site-footer { background: var(--dark); padding: 24px; text-align: center; }
+    .site-footer .cheer { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 4px; }
+    .site-footer .copy { font-size: 12px; color: rgba(255,255,255,.2); }
+
+    @media (max-width: 480px) {
+      .hero-inner { flex-direction: column; }
+      .btn-row { flex-direction: column; }
+      .cta-btn, .btn-outline { max-width: 100%; }
+    }
+  </style>
+</head>
+<ody>
+
+  <div class="topbar">
+    <a href="/" class="topbar-logo">
+      <div class="topbar-mark">📋</div>
+      <span class="topbar-name">Яндекс Смена <em>/ Обучение</em></span>
+    </a>
+    <a href="/" class="back-link">← Все бренды</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-icon-wrap">🧴</div>
+      <div class="hero-text">
+        <div class="hero-breadcrumb"><a href="/">Все обучения</a> / Grass</div>
+        <h1 class="hero-title">Мерчендайзинг у партнёра «Grass»</h1>
+        <p class="hero-sub">Очень рады, что наша новая услуга заинтересовала Вас! Ниже — ключевые моменты для выполнения задания.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="step-card">
+      <div class="step-card-header">
+        <div class="step-icon">📚</div>
+        <h2 class="step-title">Обучение — первый шаг</h2>
+      </div>
+      <div class="step-body">
+        <div class="study-banner">📌 Первым этапом ознакомьтесь с обучением по выполнению задания. Без него задание будет недоступно.</div>
+        <p>Мы подготовили подробное руководство по услуге мерчендайзинга у партнёра «Grass»:</p>
+        <a href="https://teletype.in/@vremyanka/GrassOMP" target="_blank" class="cta-btn cta-btn--secondary">
+          <span class="cta-btn-icon">📘</span> Открыть обучение
+        </a>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-card-header">
+        <div class="step-icon">📋</div>
+        <h2 class="step-title">Основные правила</h2>
+      </div>
+      <div class="step-body">
+        <ul class="rules-list">
+          <li><div class="rule-num">1</div><div class="rule-text">Выполнять задание можно в любой период с момента открытия магазина до <span class="highlight">19:00</span>.</div></li>
+          <li><div class="rule-num">2</div><div class="rule-text">Подтверждать задание кодом не нужно — просто игнорируйте запрос приложения. Смена запустится автоматически, выплата поступит после корректного заполнения анкеты и проверки заказчиком (до 72 часов).</div></li>
+          <li><div class="rule-num">3</div><div class="rule-text">Рекомендуем выполнять задания по мерчендайзингу <strong>вдобавок к основным</strong> на этой точке — так вы сэкономите время на дорогу и уже будете иметь нужные допуски.</div></li>
+          <li><div class="rule-num">4</div><div class="rule-text">Если задание не завершено или выплата не пришла — обращайтесь в службу поддержки «Яндекс Смена» в приложении.</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-card-header">
+        <div class="step-icon">📝</div>
+        <h2 class="step-title">Заполнение анкеты</h2>
+      </div>
+      <div class="step-body">
+        <p>Анкета заполняется в приложении <strong>Optimum f.r.s.</strong> Установите его заранее — <strong>в самом приложении открывать анкету не нужно</strong>.</p>
+        <div class="btn-row">
+          <a href="https://clck.ru/3SCRJJ" target="_blank" class="btn-outline">🍎 Скачать для iOS</a>
+          <a href="https://clck.ru/3SCRUR" target="_blank" class="btn-outline">🤖 Скачать для Android</a>
+        </div>
+        
+              <div class="info-card accent-note">
+                🔎 Перейдите по кнопке ниже. В поиске введите <strong>адрес вашей точки и нажмите на неё</strong> — вас автоматически перенесёт в анкету.<br>Если поиск не находит — попробуйте найти магазин вручную, пролистывая список.
+              </div>
+              <a href="https://d2001ya-cmyk.github.io/grass_ankets/" target="_blank" class="cta-btn">
+                <span class="cta-btn-icon">📍</span> Открыть анкету
+              </a>
+      </div>
+    </div>
+
+    
+          <div class="step-card">
+            <div class="step-card-header">
+              <div class="step-icon">💬</div>
+              <h2 class="step-title">Поддержка</h2>
+            </div>
+            <div class="step-body">
+              <p>По всем вопросам пишите в чат с торговой точкой или обращайтесь в службу поддержки Яндекс Смена в приложении.</p>
+            </div>
+          </div>
+    
+    
+          <div class="step-card">
+            <div class="step-card-header">
+              <div class="step-icon">🔐</div>
+              <h2 class="step-title">Доступы и документы</h2>
+            </div>
+            <div class="step-body">
+              <p class="sub-label">Для магазинов Лента:</p>
+              
+              <div class="info-card info-card--key">
+                🔑 Доступ в магазин "Лента" осуществляется по коду из системы таймбук.<br><br>
+                Ваш код вы получите в чате с торговой точкой до старта вашего задания. Если вы не получили код — напишите в чат с торговой точкой.
+              </div>
+              <p class="sub-label" style="margin-top:16px">Для других сетей:</p>
+              
+              <div class="permit-box">
+                <div class="permit-box-title">📄 Сопроводительное письмо</div>
+                <p>Заполните данные по вашему заданию в форме и нажмите <strong>«Скачать PDF»</strong>:</p>
+                <a href="https://d2001ya-cmyk.github.io/c.doc/" target="_blank" class="cta-btn"><span class="cta-btn-icon">📥</span> Скачать сопроводительное письмо (PDF)</a>
+              </div>
+              <div class="info-card info-card--success">
+                ✅ На задание возьмите с собой паспорт, медкнижку и заранее подготовленное сопроводительное письмо.
+              </div>
+              <ul class="tip-list">
+                <li>Если допуск нужен — сделайте его заранее по ссылке.</li>
+                
+                <li><strong>По всем вопросам пишите в чат с торговой точкой.</strong></li>
+              </ul>
+            </div>
+          </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <p class="cheer">🎯 Удачи на задании!</p>
+    <p class="copy">Спасибо, что помогаете делать задания в «Смене» более разнообразными!</p>
+  </footer>
+
+</body>
+</html>
